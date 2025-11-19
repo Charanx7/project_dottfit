@@ -54,7 +54,7 @@ const CompaniesSection = () => {
     let cancelled = false;
     dispatch({ type: 'FETCH_START' });
 
-    // Fetch the static db.json from public/
+    
     fetch('/db.json')
       .then(res => {
         if (!res.ok) throw new Error('Network response was not ok');
@@ -73,7 +73,7 @@ const CompaniesSection = () => {
     return () => { cancelled = true; };
   }, []);
 
-  // derive filter lists
+  
   const locations = useMemo(() => ['All', ...Array.from(new Set((data || []).map(g => g.location)))], [data]);
   const industries = useMemo(() => ['All', ...Array.from(new Set((data || []).map(g => g.industry)))], [data]);
 
@@ -109,20 +109,20 @@ const CompaniesSection = () => {
   <div className="max-w-7xl mx-auto">
     <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-6">
       <div className="flex-1 min-w-0">
-        {/* Heading: scales nicely for mobile -> tablet -> desktop */}
+        
         <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight">
           Partner Gyms &amp; <span className="text-red-500">Studios</span>
         </h3>
-        {/* Paragraph: constrained width so it wraps well on tablets */}
+        
         <p className="mt-2 text-sm sm:text-base md:text-lg text-gray-400 max-w-xl">
           Browse and filter nearby gyms, studios and fitness partners. Use the controls to search, filter and switch views.
         </p>
       </div>
 
-      {/* Controls: responsive grid so items reflow on tablet without overflow */}
+    
       <div className="w-full md:w-auto mt-4 md:mt-0">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2 md:gap-3 items-center">
-          {/* Search input spans 2 cols on small screens for comfortable typing */}
+          
           <div className="col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-2">
             <div className="flex items-center bg-gray-900 rounded-full px-3 py-2 border border-gray-700">
               <input
@@ -194,7 +194,7 @@ const CompaniesSection = () => {
       </div>
     </div>
 
-    {/* Loading / Error */}
+   
     {loading && (
       <div className="py-12 sm:py-20 flex items-center justify-center">
         <div className="animate-spin w-10 h-10 border-4 border-t-red-600 border-gray-800 rounded-full" />
@@ -205,14 +205,14 @@ const CompaniesSection = () => {
       <div className="py-8 text-center text-red-400">Failed to load partners. {String(error)}</div>
     )}
 
-    {/* Content */}
+   
     {!loading && !error && (
       <div>
         {filtered.length === 0 ? (
           <div className="py-8 text-center text-gray-400">No partners match your filters.</div>
         ) : (
           <>
-            {/* CARDS view (responsive grid) */}
+            
             {filters.view === 'cards' && (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 {filtered.map((g) => (
@@ -253,10 +253,10 @@ const CompaniesSection = () => {
               </div>
             )}
 
-            {/* TABLE view */}
+            
             {filters.view === 'table' && (
               <>
-                {/* Desktop / tablet table */}
+                
                 <div className="hidden md:block overflow-x-auto rounded-lg border border-gray-700">
                   <table className="min-w-full divide-y divide-gray-700">
                     <thead className="bg-gray-900">
@@ -284,7 +284,7 @@ const CompaniesSection = () => {
                   </table>
                 </div>
 
-                {/* Mobile stacked list for table view */}
+                
                 <div className="md:hidden space-y-3">
                   {filtered.map(g => (
                     <div key={g.id} className="p-4 rounded-2xl bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 border border-gray-700 shadow-sm">
@@ -439,10 +439,10 @@ const GymHomePage = () => {
   const mouseYSpring = useSpring(mouseY, springConfig);
   const prefersReducedMotion = useReducedMotion();
 
-  // Fix: Scroll to top on page load/refresh
+
   useEffect(() => {
     window.scrollTo(0, 0);
-    // This ensures browser does not auto-restore scroll (cross-browser)
+  
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
     }
@@ -515,22 +515,22 @@ const GymHomePage = () => {
   className="relative min-h-[100svh] min-h-screen w-full flex flex-col lg:flex-row items-center justify-center overflow-hidden bg-black"
   style={{ marginTop: 0, paddingTop: 0 }}
 >
-  {/* Background Glow Layers */}
+
   <div className="absolute inset-0">
-    {/* Dark vignette overlay */}
+  
     <div className="absolute inset-0 bg-gradient-to-br from-black via-transparent to-black opacity-90"></div>
 
-    {/* Extra dark overlay to reduce brightness */}
+   
     <div className="absolute inset-0 bg-black/40"></div>
 
-    {/* Glow Orbs */}
+    
     <div className="absolute -bottom-40 -left-40 w-[400px] md:w-[700px] h-[400px] md:h-[700px] rounded-full bg-orange-600/40 blur-[120px] md:blur-[220px]"></div>
     <div className="absolute top-0 right-0 w-[250px] md:w-[600px] h-[250px] md:h-[600px] rounded-full bg-red-600/30 blur-[90px] md:blur-[200px]"></div>
     <div className="absolute bottom-20 right-1/2 w-[120px] md:w-[300px] h-[120px] md:h-[300px] rounded-full bg-yellow-500/20 blur-[70px] md:blur-[150px]"></div>
   </div>
 
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-8 md:py-16 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center relative z-10 w-full">
-    {/* Left Content */}
+    
     <motion.div
       initial={{ opacity: 0, x: -50 }}
       animate={{ opacity: 1, x: 0 }}
@@ -560,7 +560,7 @@ const GymHomePage = () => {
         achieve peak performance and exceed your fitness goals.
       </motion.p>
 
-      {/* Buttons */}
+   
       <motion.div
         className="flex flex-col sm:flex-row gap-4 sm:gap-6"
         initial={{ opacity: 0, y: 30 }}
@@ -576,7 +576,7 @@ const GymHomePage = () => {
         </button>
       </motion.div>
 
-      {/* Floating tags */}
+      
       <motion.div
         className="flex flex-wrap gap-2 sm:gap-3 pt-2 sm:pt-4"
         initial={{ opacity: 0, y: 30 }}
@@ -601,7 +601,7 @@ const GymHomePage = () => {
       </motion.div>
     </motion.div>
 
-    {/* Right Image */}
+  
     <motion.div
       initial={{ opacity: 0, x: 50 }}
       animate={{ opacity: 1, x: 0 }}
@@ -616,7 +616,7 @@ const GymHomePage = () => {
     </motion.div>
   </div>
 
-  {/* Scroll Indicator */}
+  
   {!prefersReducedMotion && (
     <motion.div
       animate={{ y: [0, -15, 0] }}
@@ -632,13 +632,12 @@ const GymHomePage = () => {
   <CompaniesSection />       
 
 
-{/* About Section */}
 <section className="relative bg-black text-white py-20 px-6 lg:px-20">
   <div className="max-w-7xl mx-auto text-center space-y-6">
     
 
 
-    {/* Heading */}
+  
     <motion.h2
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -649,7 +648,7 @@ const GymHomePage = () => {
       YOUR <span className="text-red-500">FITNESS</span> JOURNEY STARTS HERE
     </motion.h2>
 
-    {/* Paragraph */}
+    
     <motion.p
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -671,7 +670,7 @@ const GymHomePage = () => {
     { value: "60+", label: "Weekly Classes" },
     { value: "117+", label: "Expert Trainers" },
   ].map((stat, i) => {
-    // Split value into number and plus sign
+    
     const number = stat.value.replace("+", "");
     const plus = stat.value.includes("+") ? "+" : "";
 
@@ -694,7 +693,7 @@ const GymHomePage = () => {
   })}
 </div>
 
-  {/* Background Video with Play Button */}
+ 
 <motion.div
   initial={{ opacity: 0, scale: 0.95 }}
   whileInView={{ opacity: 1, scale: 1 }}
@@ -750,7 +749,7 @@ Experience the ultimate commitment to your health and goals.`}
 />
 
 
-     {/* Stats Section */}
+     
 <AnimatedSection className="py-24 bg-black relative overflow-hidden">
   <div className="absolute inset-0 overflow-hidden">
     <div className="absolute -top-40 -left-40 w-80 h-80 bg-red-500/10 rounded-full blur-3xl"></div>
@@ -779,7 +778,7 @@ Experience the ultimate commitment to your health and goals.`}
         { number: "15", label: "Years Experience", icon: Clock, color: "red" },
         { number: "24/7", label: "Support Available", icon: Heart, color: "red" }
       ].map((stat, index) => {
-        // Split number and plus sign for styling
+       
         const numberPart = stat.number.replace("+", "");
         const hasPlus = stat.number.includes("+");
         
@@ -789,13 +788,13 @@ Experience the ultimate commitment to your health and goals.`}
             delay={index * 0.2}
             className="p-8 rounded-3xl bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 shadow-2xl border border-gray-700/50 backdrop-blur-xl relative overflow-hidden group"
           >
-            {/* Animated gradient border */}
+            
             <div className="absolute inset-0 bg-gradient-to-r from-red-600/0 via-red-600/50 to-red-600/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-3xl -m-0.5"></div>
             
-            {/* Inner glow effect */}
+            
             <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 via-transparent to-red-600/5 rounded-3xl"></div>
             
-            {/* Corner accents */}
+           
             <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-red-600/50"></div>
             <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-red-600/50"></div>
             <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-red-600/50"></div>
@@ -832,10 +831,10 @@ Experience the ultimate commitment to your health and goals.`}
               </span>
             </div>
             
-            {/* Hover effect overlay */}
+            
             <div className="absolute inset-0 bg-gradient-to-br from-red-600/0 via-red-600/5 to-red-700/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
             
-            {/* Floating particles effect */}
+           
             <div className="absolute inset-0 overflow-hidden rounded-3xl">
               {[...Array(5)].map((_, i) => (
                 <motion.div
@@ -909,7 +908,7 @@ Experience the ultimate commitment to your health and goals.`}
           className={`p-8 rounded-3xl transition-all duration-300 cursor-pointer backdrop-blur-sm relative overflow-hidden bg-gray-800/70 shadow hover:shadow-2xl border border-gray-700`}
           style={{ willChange: "transform, opacity" }}
         >
-          {/* Icon without animation */}
+         
           <div className="mb-6">
             <service.icon
               size={48}
