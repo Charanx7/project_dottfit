@@ -1,6 +1,4 @@
 
-
-
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { Award, Target, Heart, Plus, Minus } from 'lucide-react';
